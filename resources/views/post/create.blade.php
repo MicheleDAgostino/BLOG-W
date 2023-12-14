@@ -16,10 +16,16 @@
                     <div class="flex flex-col w-[50%] items-center">
                         <label class="my-3">Titolo post</label>
                         <input type="text" name="title" placeholder="Titolo" class="input input-bordered w-full max-w-xs" />
+                        @error('title')
+                            <div class="alert alert-error">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="flex flex-col w-[50%] items-center mt-3">
                         <label class="my-3">Descrizione</label>
                         <textarea name="description" class="textarea textarea-bordered w-full" placeholder="Descrizione"></textarea>
+                        @error('description')
+                            <div class="alert alert-error">{{ $message }}</div>
+                        @enderror
                     </div>
                     <button type="submit" class="btn btn-primary mt-5">Inserisci</button>
                 </form>

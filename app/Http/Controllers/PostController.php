@@ -14,7 +14,7 @@ class PostController extends Controller
     public function index()
     {
         
-        $posts = Post::orderBy('created_at', 'DESC')->get();
+        $posts = Post::withCount('comments')->orderBy('created_at', 'DESC')->get();
         return view('post.index', compact('posts'));
 
     }
@@ -32,6 +32,14 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required'
+        ], [
+            'title.required' => 'Il titolo è richiesto',
+            'description.required' => 'Il campo descrizione è richiesto.'
+        ]);
         
         Auth::user()->posts()->create([
             'title' => $request->title,

@@ -40,11 +40,14 @@
                                 @csrf
                                 <input type="hidden" name="post_id" value="{{$post->id}}">
                                 <input name="description" type="text" class="input input-bordered max-w-xs">
+                                @error('description')
+                                    <span class="alert alert-error p-2">{{ $message }}</span>
+                                @enderror
                                 <button type="submit" class="btn btn-primary">Commenta</button>
                             </form>
 
                           </div>
-                          <h3>Commenti:</h3>
+                          <h3>{{$post->comments_count}} Commenti:</h3>
 
                           {{-- COMMENTS --}}
                           @if ($post->comments->isEmpty())

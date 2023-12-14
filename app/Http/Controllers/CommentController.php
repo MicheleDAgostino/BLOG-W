@@ -30,6 +30,12 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'description' => 'required'
+        ], [
+            'description.required' => 'Il commento è richiesto.'
+        ]);
+
         $post = Post::findOrFail($request->post_id);
 
         $comment = Auth::user()->comments()->create([
